@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revelación de Sexo - Vanessa Cruz</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Great+Vibes&family=Crimson+Text:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Elementos decorativos de fondo -->
+    <div class="background-decoration">
+        <div class="cloud cloud-1"></div>
+        <div class="cloud cloud-2"></div>
+        <div class="cloud cloud-3"></div>
+        <div class="star-hanging star-1"></div>
+        <div class="star-hanging star-2"></div>
+        <div class="star-hanging star-3"></div>
+        <div class="floating-heart heart-1"></div>
+        <div class="floating-heart heart-2"></div>
+        <div class="floating-heart heart-3"></div>
+        <div class="floating-heart heart-4"></div>
+    </div>
+
+    <div class="container">
+        <!-- Encabezado con animales -->
+        <header class="header">
+            <div class="animals-row">
+                <div class="animal giraffe">🦒</div>
+                <div class="animal bear">🐻</div>
+                <div class="animal raccoon">🦝</div>
+                <div class="animal elephant">🐘</div>
+            </div>
+            <div class="decorative-heart">💛</div>
+        </header>
+
+        <!-- Texto de bienvenida -->
+        <section class="welcome">
+            <h1 class="main-title">¡Hola!</h1>
+            <p class="subtitle">Soy un pequeño secreto en camino...</p>
+            <p class="intro">
+                Acompaña a mi mami a revelar el secreto más dulce en compañía de sus amigos y familia más importantes, entre ellos, tú.
+            </p>
+        </section>
+
+        <!-- Celebremos con -->
+        <section class="celebrate-with">
+            <h2 class="section-title">Celebremos con:</h2>
+            <p class="host-name">Vanessa Cruz</p>
+        </section>
+
+        <!-- Detalles del evento -->
+        <section class="event-details">
+            <div class="detail-card">
+                <h3 class="detail-title">¿Cuándo?</h3>
+                <p class="event-date">Sábado 24 de Enero de 2026</p>
+                <p class="event-time">3:00 PM</p>
+            </div>
+
+            <div class="detail-card">
+                <h3 class="detail-title">¿Dónde?</h3>
+                <p class="event-location">La ubicación se enviará por privado.</p>
+            </div>
+        </section>
+
+        <!-- Código de vestimenta -->
+        <section class="dress-code">
+            <h3 class="section-title">Código de Vestimenta:</h3>
+            <p class="formal-dress">Formal Blanco</p>
+
+            <div class="gender-guess">
+                <div class="guess-option girl-option">
+                    <div class="bow pink-bow"></div>
+                    <p>Usa una prenda o accesorio <strong>Rosa Palo</strong> si crees que soy <strong>Niña</strong></p>
+                </div>
+
+                <div class="guess-option boy-option">
+                    <div class="bow blue-bow"></div>
+                    <p>Usa una prenda o accesorio <strong>Azul Pastel</strong> si crees que soy <strong>Niño</strong></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Juego de predicción interactivo -->
+        <section class="prediction-game">
+            <h3 class="section-title">¿Qué crees que será?</h3>
+            <div class="prediction-buttons">
+                <button class="prediction-btn girl-btn" data-gender="niña">
+                    <span class="btn-icon">💗</span>
+                    <span class="btn-text">Niña</span>
+                </button>
+                <button class="prediction-btn boy-btn" data-gender="niño">
+                    <span class="btn-icon">💙</span>
+                    <span class="btn-text">Niño</span>
+                </button>
+            </div>
+            <p class="prediction-result" id="predictionResult"></p>
+        </section>
+
+        <!-- Contador de pases -->
+        <section class="guest-counter">
+            <h3 class="section-title">¿Cuántos asistirán?</h3>
+            <div class="counter-control">
+                <button class="counter-btn" id="decreaseBtn">−</button>
+                <span class="counter-display" id="counterDisplay">1</span>
+                <button class="counter-btn" id="increaseBtn">+</button>
+            </div>
+            <p class="counter-label">pase(s)</p>
+        </section>
+
+        <!-- Mensaje personal -->
+        <section class="personal-message">
+            <p class="message-text">
+                Este momento es muy pequeño, muy especial y solo para quienes viven en mi corazón.
+            </p>
+            <p class="message-text">
+                Si esta invitación llegó a ti, es porque eres una persona verdaderamente importante para mí y porque quiero que seas parte de la familia de mi bebé desde el inicio.
+            </p>
+            <p class="message-highlight">
+                Será una celebración muy íntima, hecha con amor.
+            </p>
+        </section>
+
+        <!-- Temática de regalos -->
+        <section class="gifts-theme">
+            <h3 class="section-title">Como temática de regalos:</h3>
+            <div class="gift-options">
+                <div class="gift-item">
+                    <span class="gift-emoji">💙</span>
+                    <p><strong>Niño:</strong> pañales</p>
+                </div>
+                <div class="gift-item">
+                    <span class="gift-emoji">💗</span>
+                    <p><strong>Niña:</strong> toallitas</p>
+                </div>
+            </div>
+            <p class="gift-alternative">O algún detallito unisex para bebé</p>
+        </section>
+
+        <!-- Confirmación de asistencia -->
+        <section class="confirmation">
+            <h3 class="section-title">Confirma tu Asistencia</h3>
+            <p class="confirmation-text">
+                Por favor, confirma antes del <strong>17 de Enero de 2026</strong>
+            </p>
+            <button class="whatsapp-confirm-btn" id="whatsappBtn">
+                <span class="wa-icon">💚</span>
+                <span class="wa-text">Confirmar por WhatsApp</span>
+            </button>
+            <p class="phone-number">477 668 8796</p>
+        </section>
+
+        <!-- Despedida -->
+        <footer class="footer">
+            <p class="thanks-message">Gracias por acompañarnos en este secreto tan dulce.</p>
+            <p class="signature">Con todo mi cariño,</p>
+            <p class="signature-name">Vanessa Cruz 🤍</p>
+            <p class="rsvp-reminder">(Favor de confirmar asistencia)</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
