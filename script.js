@@ -9,12 +9,15 @@ const appState = {
 
 // Inicialización cuando el DOM está listo
 document.addEventListener('DOMContentLoaded', function() {
+    initPageLoader();
     initAnimations();
     initPredictionGame();
     initGuestCounter();
     initWhatsAppButton();
     initParallaxEffect();
     initBackgroundMusic();
+    initCountdown();
+    initShareButton();
 });
 
 // Animación de entrada suave
@@ -444,6 +447,207 @@ function showMusicMessage(message) {
     }, 3000);
 }
 
+// ===== FUNCIONALIDADES 2026 =====
+
+// Page Loader
+function initPageLoader() {
+    const loader = document.getElementById('pageLoader');
+
+    if (!loader) return;
+
+    // Ocultar loader cuando la página esté completamente cargada
+    window.addEventListener('load', function() {
+        setTimeout(() => {
+            loader.classList.add('hidden');
+
+            // Remover del DOM después de la animación
+            setTimeout(() => {
+                loader.remove();
+            }, 500);
+        }, 2000); // Mostrar loader por 2 segundos mínimo
+    });
+}
+
+// Contador regresivo
+function initCountdown() {
+    const eventDate = new Date('2026-01-24T15:00:00').getTime();
+
+    const daysEl = document.getElementById('days');
+    const hoursEl = document.getElementById('hours');
+    const minutesEl = document.getElementById('minutes');
+    const secondsEl = document.getElementById('seconds');
+    const messageEl = document.getElementById('countdownMessage');
+
+    if (!daysEl || !hoursEl || !minutesEl || !secondsEl) return;
+
+    function updateCountdown() {
+        const now = new Date().getTime();
+        const distance = eventDate - now;
+
+        if (distance < 0) {
+            // El evento ya pasó
+            daysEl.textContent = '00';
+            hoursEl.textContent = '00';
+            minutesEl.textContent = '00';
+            secondsEl.textContent = '00';
+            messageEl.textContent = '¡El evento ha comenzado! 🎉';
+            return;
+        }
+
+        // Calcular tiempo restante
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        // Actualizar DOM
+        daysEl.textContent = String(days).padStart(2, '0');
+        hoursEl.textContent = String(hours).padStart(2, '0');
+        minutesEl.textContent = String(minutes).padStart(2, '0');
+        secondsEl.textContent = String(seconds).padStart(2, '0');
+
+        // Mensaje especial
+        if (days === 0 && hours === 0) {
+            messageEl.textContent = '¡Es hoy! 🎊';
+        } else if (days === 0) {
+            messageEl.textContent = '¡Menos de un día! 💕';
+        } else if (days === 1) {
+            messageEl.textContent = '¡Mañana es el gran día! ✨';
+        } else if (days <= 7) {
+            messageEl.textContent = '¡Esta semana! 🎉';
+        } else {
+            messageEl.textContent = 'para la revelación más dulce 💝';
+        }
+    }
+
+    // Actualizar cada segundo
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+}
+
+// Botón de compartir
+function initShareButton() {
+    const shareBtn = document.getElementById('shareBtn');
+    const shareModal = document.getElementById('shareModal');
+    const shareModalClose = document.getElementById('shareModalClose');
+    const copyLinkBtn = document.getElementById('copyLinkBtn');
+
+    if (!shareBtn || !shareModal) return;
+
+    // Abrir modal
+    shareBtn.addEventListener('click', function() {
+        shareModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    });
+
+    // Cerrar modal
+    function closeModal() {
+        shareModal.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    shareModalClose.addEventListener('click', closeModal);
+
+    // Cerrar al hacer click fuera del modal
+    shareModal.addEventListener('click', function(e) {
+        if (e.target === shareModal) {
+            closeModal();
+        }
+    });
+
+    // Cerrar con tecla ESC
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && shareModal.classList.contains('active')) {
+            closeModal();
+        }
+    });
+
+    // Copiar enlace
+    if (copyLinkBtn) {
+        copyLinkBtn.addEventListener('click', function() {
+            const linkInput = document.getElementById('shareLink');
+            linkInput.select();
+            linkInput.setSelectionRange(0, 99999); // Para móviles
+
+            try {
+                navigator.clipboard.writeText(linkInput.value).then(() => {
+                    // Cambiar texto del botón
+                    const originalText = copyLinkBtn.textContent;
+                    copyLinkBtn.textContent = '¡Copiado! ✓';
+                    copyLinkBtn.classList.add('copied');
+
+                    setTimeout(() => {
+                        copyLinkBtn.textContent = originalText;
+                        copyLinkBtn.classList.remove('copied');
+                    }, 2000);
+                });
+            } catch (err) {
+                // Fallback para navegadores antiguos
+                document.execCommand('copy');
+                copyLinkBtn.textContent = '¡Copiado! ✓';
+                setTimeout(() => {
+                    copyLinkBtn.textContent = 'Copiar Enlace';
+                }, 2000);
+            }
+        });
+    }
+}
+
+// Compartir vía redes sociales
+function shareVia(platform) {
+    const url = encodeURIComponent('https://revelacion-de-sexo-vanessa.invitados.org');
+    const title = encodeURIComponent('Revelación de Sexo - Vanessa Cruz');
+    const description = encodeURIComponent('¡Únete a la revelación de sexo del bebé de Vanessa! Sábado 24 de Enero 2026 a las 3:00 PM.');
+
+    let shareUrl = '';
+
+    switch (platform) {
+        case 'whatsapp':
+            shareUrl = `https://wa.me/?text=${title}%0A%0A${description}%0A%0A${url}`;
+            break;
+        case 'facebook':
+            shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+            break;
+        case 'twitter':
+            shareUrl = `https://twitter.com/intent/tweet?url=${url}&text=${title}%0A${description}`;
+            break;
+        case 'email':
+            const subject = title;
+            const body = `${decodeURIComponent(description)}%0A%0AVer invitación: ${decodeURIComponent(url)}`;
+            shareUrl = `mailto:?subject=${subject}&body=${body}`;
+            break;
+    }
+
+    if (shareUrl) {
+        window.open(shareUrl, '_blank');
+    }
+}
+
+// Hacer shareVia disponible globalmente para los onclick en HTML
+window.shareVia = shareVia;
+
+// Web Share API (si está disponible)
+if (navigator.share) {
+    const shareBtn = document.getElementById('shareBtn');
+    if (shareBtn) {
+        shareBtn.addEventListener('click', async function(e) {
+            e.stopPropagation();
+
+            try {
+                await navigator.share({
+                    title: 'Revelación de Sexo - Vanessa Cruz',
+                    text: '¡Únete a la revelación de sexo del bebé de Vanessa! Sábado 24 de Enero 2026.',
+                    url: 'https://revelacion-de-sexo-vanessa.invitados.org'
+                });
+                console.log('Compartido exitosamente');
+            } catch (err) {
+                // Si el usuario cancela o hay error, mostrar modal
+                document.getElementById('shareModal').classList.add('active');
+            }
+        });
+    }
+}
+
 // Log para debugging (remover en producción)
 console.log('✨ Invitación de revelación de sexo cargada correctamente');
 console.log('📱 Funcionalidades activas:', {
@@ -452,5 +656,9 @@ console.log('📱 Funcionalidades activas:', {
     prediccion: true,
     contador: true,
     whatsapp: true,
-    musica: true
+    musica: true,
+    loader: true,
+    countdown: true,
+    share: true,
+    webShareAPI: !!navigator.share
 });

@@ -2,12 +2,69 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Revelación de Sexo - Vanessa Cruz</title>
-    <link rel="stylesheet" href="styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+    <!-- Primary Meta Tags -->
+    <title>Revelación de Sexo - Vanessa Cruz | 24 Enero 2026</title>
+    <meta name="title" content="Revelación de Sexo - Vanessa Cruz">
+    <meta name="description" content="¡Únete a la revelación de sexo del bebé de Vanessa Cruz! Sábado 24 de Enero 2026 a las 3:00 PM. Una celebración íntima y especial.">
+    <meta name="keywords" content="revelación de sexo, baby shower, gender reveal, Vanessa Cruz, evento bebé 2026">
+    <meta name="author" content="Vanessa Cruz">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://revelacion-de-sexo-vanessa.invitados.org/">
+    <meta property="og:title" content="Revelación de Sexo - Vanessa Cruz">
+    <meta property="og:description" content="¡Únete a la revelación de sexo del bebé de Vanessa! Sábado 24 de Enero 2026 a las 3:00 PM.">
+    <meta property="og:image" content="https://revelacion-de-sexo-vanessa.invitados.org/imagenes/imagen descargable.jfif">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://revelacion-de-sexo-vanessa.invitados.org/">
+    <meta property="twitter:title" content="Revelación de Sexo - Vanessa Cruz">
+    <meta property="twitter:description" content="¡Únete a la revelación de sexo del bebé de Vanessa! 24 de Enero 2026.">
+    <meta property="twitter:image" content="https://revelacion-de-sexo-vanessa.invitados.org/imagenes/imagen descargable.jfif">
+
+    <!-- PWA / Mobile -->
+    <meta name="theme-color" content="#f5e6d3">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Revelación Vanessa">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👶</text></svg>">
+
+    <!-- Preload critical resources -->
+    <link rel="preload" href="styles.css" as="style">
+    <link rel="preload" href="script.js" as="script">
+    <link rel="preload" href="musica/revelacion sexo.mp3" as="audio" type="audio/mpeg">
+
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Great+Vibes&family=Crimson+Text:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Structured Data (Schema.org) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Event",
+      "name": "Revelación de Sexo - Vanessa Cruz",
+      "description": "Revelación de sexo del bebé de Vanessa Cruz",
+      "startDate": "2026-01-24T15:00:00-06:00",
+      "endDate": "2026-01-24T19:00:00-06:00",
+      "eventStatus": "https://schema.org/EventScheduled",
+      "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+      "organizer": {
+        "@type": "Person",
+        "name": "Vanessa Cruz"
+      },
+      "image": "https://revelacion-de-sexo-vanessa.invitados.org/imagenes/imagen descargable.jfif"
+    }
+    </script>
 </head>
 <body>
     <!-- Audio de fondo -->
@@ -16,10 +73,27 @@
         Tu navegador no soporta el elemento de audio.
     </audio>
 
+    <!-- Loader de carga -->
+    <div class="page-loader" id="pageLoader">
+        <div class="loader-content">
+            <div class="loader-emoji">👶</div>
+            <p class="loader-text">Cargando invitación...</p>
+            <div class="loader-bar">
+                <div class="loader-progress"></div>
+            </div>
+        </div>
+    </div>
+
     <!-- Botón de control de música -->
     <button id="musicToggle" class="music-toggle" aria-label="Controlar música de fondo">
         <span class="music-icon">🎵</span>
         <span class="music-text">Música</span>
+    </button>
+
+    <!-- Botón de compartir -->
+    <button id="shareBtn" class="share-btn" aria-label="Compartir invitación">
+        <span class="share-icon">📤</span>
+        <span class="share-text">Compartir</span>
     </button>
 
     <!-- Elementos decorativos de fondo -->
@@ -75,6 +149,30 @@
                 <h3 class="detail-title">¿Dónde?</h3>
                 <p class="event-location">La ubicación se enviará por privado.</p>
             </div>
+        </section>
+
+        <!-- Contador regresivo -->
+        <section class="countdown-section">
+            <h3 class="section-title">Faltan:</h3>
+            <div class="countdown-timer" id="countdownTimer">
+                <div class="countdown-item">
+                    <span class="countdown-value" id="days">00</span>
+                    <span class="countdown-label">Días</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-value" id="hours">00</span>
+                    <span class="countdown-label">Horas</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-value" id="minutes">00</span>
+                    <span class="countdown-label">Minutos</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-value" id="seconds">00</span>
+                    <span class="countdown-label">Segundos</span>
+                </div>
+            </div>
+            <p class="countdown-message" id="countdownMessage"></p>
         </section>
 
         <!-- Código de vestimenta -->
@@ -171,6 +269,52 @@
             <p class="signature-name">Vanessa Cruz 🤍</p>
             <p class="rsvp-reminder">(Favor de confirmar asistencia)</p>
         </footer>
+    </div>
+
+    <!-- Modal de compartir -->
+    <div class="share-modal" id="shareModal">
+        <div class="share-modal-content">
+            <div class="share-modal-header">
+                <h3 class="share-modal-title">Compartir Invitación</h3>
+                <p class="share-modal-subtitle">Comparte esta invitación especial</p>
+            </div>
+
+            <div class="share-options">
+                <button class="share-option-btn" onclick="shareVia('whatsapp')">
+                    <span class="share-option-icon">💚</span>
+                    <span>WhatsApp</span>
+                </button>
+                <button class="share-option-btn" onclick="shareVia('facebook')">
+                    <span class="share-option-icon">📘</span>
+                    <span>Facebook</span>
+                </button>
+                <button class="share-option-btn" onclick="shareVia('twitter')">
+                    <span class="share-option-icon">🐦</span>
+                    <span>Twitter</span>
+                </button>
+                <button class="share-option-btn" onclick="shareVia('email')">
+                    <span class="share-option-icon">📧</span>
+                    <span>Email</span>
+                </button>
+            </div>
+
+            <div class="copy-link-section">
+                <input
+                    type="text"
+                    class="copy-link-input"
+                    id="shareLink"
+                    value="https://revelacion-de-sexo-vanessa.invitados.org"
+                    readonly
+                >
+                <button class="copy-link-btn" id="copyLinkBtn">
+                    Copiar Enlace
+                </button>
+            </div>
+
+            <button class="share-modal-close" id="shareModalClose">
+                Cerrar
+            </button>
+        </div>
     </div>
 
     <script src="script.js"></script>
