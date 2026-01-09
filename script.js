@@ -2,7 +2,9 @@
 const appState = {
     guestCount: 1,
     selectedGender: null,
-    userName: ''
+    userName: '',
+    musicPlaying: false,
+    firstInteraction: false
 };
 
 // Inicialización cuando el DOM está listo
@@ -12,6 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initGuestCounter();
     initWhatsAppButton();
     initParallaxEffect();
+    initBackgroundMusic();
 });
 
 // Animación de entrada suave
@@ -332,6 +335,115 @@ document.addEventListener('touchend', function(event) {
 
 let lastTap = 0;
 
+// Control de música de fondo
+function initBackgroundMusic() {
+    const audio = document.getElementById('backgroundMusic');
+    const musicToggle = document.getElementById('musicToggle');
+    const musicIcon = musicToggle.querySelector('.music-icon');
+    const musicText = musicToggle.querySelector('.music-text');
+
+    if (!audio || !musicToggle) return;
+
+    // Iniciar música al primer click en cualquier parte de la página
+    function startMusicOnFirstClick() {
+        if (!appState.firstInteraction) {
+            appState.firstInteraction = true;
+
+            audio.play().then(() => {
+                appState.musicPlaying = true;
+                updateMusicButtonState(musicToggle, musicIcon, musicText, true);
+                showMusicMessage('🎵 Música activada');
+            }).catch(error => {
+                console.log('No se pudo reproducir la música automáticamente:', error);
+                appState.musicPlaying = false;
+                updateMusicButtonState(musicToggle, musicIcon, musicText, false);
+            });
+
+            // Remover el listener después del primer click
+            document.removeEventListener('click', startMusicOnFirstClick);
+            document.removeEventListener('touchstart', startMusicOnFirstClick);
+        }
+    }
+
+    // Agregar listeners para el primer click
+    document.addEventListener('click', startMusicOnFirstClick, { once: true });
+    document.addEventListener('touchstart', startMusicOnFirstClick, { once: true });
+
+    // Botón de control de música
+    musicToggle.addEventListener('click', function(e) {
+        e.stopPropagation(); // Evitar que active el listener de primer click
+
+        if (appState.musicPlaying) {
+            // Pausar música
+            audio.pause();
+            appState.musicPlaying = false;
+            updateMusicButtonState(musicToggle, musicIcon, musicText, false);
+            showMusicMessage('⏸️ Música pausada');
+        } else {
+            // Reproducir música
+            audio.play().then(() => {
+                appState.musicPlaying = true;
+                appState.firstInteraction = true;
+                updateMusicButtonState(musicToggle, musicIcon, musicText, true);
+                showMusicMessage('▶️ Música reproduciéndose');
+            }).catch(error => {
+                console.log('Error al reproducir música:', error);
+                showMusicMessage('❌ Error al reproducir');
+            });
+        }
+    });
+
+    // Manejar cuando la música termina (aunque está en loop)
+    audio.addEventListener('ended', function() {
+        appState.musicPlaying = false;
+        updateMusicButtonState(musicToggle, musicIcon, musicText, false);
+    });
+
+    // Manejar errores de carga
+    audio.addEventListener('error', function(e) {
+        console.error('Error al cargar el archivo de audio:', e);
+        musicToggle.style.display = 'none'; // Ocultar botón si hay error
+    });
+}
+
+// Actualizar estado visual del botón
+function updateMusicButtonState(button, icon, text, isPlaying) {
+    button.classList.remove('playing', 'paused');
+
+    if (isPlaying) {
+        button.classList.add('playing');
+        icon.textContent = '🎵';
+        text.textContent = 'Playing';
+    } else {
+        button.classList.add('paused');
+        icon.textContent = '⏸️';
+        text.textContent = 'Paused';
+    }
+}
+
+// Mostrar mensaje temporal
+function showMusicMessage(message) {
+    // Verificar si ya existe un mensaje
+    let messageEl = document.querySelector('.music-start-message');
+
+    if (messageEl) {
+        messageEl.remove();
+    }
+
+    // Crear nuevo mensaje
+    messageEl = document.createElement('div');
+    messageEl.className = 'music-start-message';
+    messageEl.textContent = message;
+    document.body.appendChild(messageEl);
+
+    // Remover después de la animación
+    setTimeout(() => {
+        if (messageEl && messageEl.parentNode) {
+            messageEl.remove();
+        }
+    }, 3000);
+}
+
 // Log para debugging (remover en producción)
 console.log('✨ Invitación de revelación de sexo cargada correctamente');
 console.log('📱 Funcionalidades activas:', {
@@ -339,5 +451,6 @@ console.log('📱 Funcionalidades activas:', {
     parallax: true,
     prediccion: true,
     contador: true,
-    whatsapp: true
+    whatsapp: true,
+    musica: true
 });
